@@ -37,7 +37,8 @@ public class CPUService {
         return cpuRepository.findById(id).map(cpu -> {
             cpu.setBrand(updatedCPU.getBrand());
             cpu.setModel(updatedCPU.getModel());
-            cpu.setSocket(updatedCPU.getSocket());
+            // Assuming updatedCPU.getSocket() gives you the full Socket object
+            cpu.setSocket(updatedCPU.getSocket()); // This should automatically update socket_id in the database
             return cpuRepository.save(cpu);
         }).orElse(null);
     }

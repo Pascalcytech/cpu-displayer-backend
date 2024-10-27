@@ -1,6 +1,6 @@
 package app.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore; // Importing JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,10 +28,6 @@ public class CPU {
     @JoinColumn(name = "socket_id", nullable = false)
     @JsonIgnore // Prevents the socket field from being serialized
     private Socket socket;
-
-    // New field for socket_id
-    @Column(name = "socket_id", nullable = false, insertable = false, updatable = false) // This field is mapped but not directly used
-    private Long socket_id;
 
     // Constructors
     public CPU() {
@@ -75,9 +71,9 @@ public class CPU {
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
-
-    // Getter for socket_id
-    public Long getSocket_id() {
+    
+    // Optionally, you could add a method to get socket_id directly if you still want that functionality
+    public Long getSocketId() {
         return socket != null ? socket.getId() : null; // Return socket's id if socket is not null
     }
 }
