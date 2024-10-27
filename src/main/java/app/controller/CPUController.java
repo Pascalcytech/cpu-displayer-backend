@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -45,14 +47,27 @@ public class CPUController {
 
     // Update an existing CPU
     @PutMapping("/{id}")
-    public ResponseEntity<CPU> updateCPU(@PathVariable Long id, @RequestBody CPU updatedCPU) {
-        CPU cpu = cpuService.updateCPU(id, updatedCPU);
-        if (cpu != null) {
-            return ResponseEntity.ok(cpu);
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<CPU> updateCPU(@PathVariable Long id, @RequestBody String rawBody) {
+        // Log the raw JSON body
+        System.out.println("Received raw JSON body: " + rawBody);
+        
+        // Deserialize the raw body to the CPU object manually
+        CPU updatedCPU;
+        try {
+            updatedCPU = new ObjectMapper().readValue(rawBody, CPU.class);
+        } catch (Exception e) {
+            System.err.println("Error deserializing JSON to CPU object: " + e.getMessage());
+            return ResponseEntity.badRequest().build();
         }
+
+        // Print CPU object after deserialization
+        System.out.println("Deserialized CPU object: " + updatedCPU);
+
+        CPU result = cpuService.updateCPU(id, updatedCPU);
+        return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
+
+
 
     // Delete a CPU by ID
     @DeleteMapping("/{id}")
