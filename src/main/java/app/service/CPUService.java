@@ -3,7 +3,7 @@ package app.service;
 import app.entity.CPU;
 import app.entity.Socket;
 import app.repository.CPURepository;
-import app.repository.SocketRepository; // Add this import
+import app.repository.SocketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

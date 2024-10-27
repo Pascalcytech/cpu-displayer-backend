@@ -33,7 +33,7 @@ public class SocketService {
         return socketRepository.save(socket);
     }
 
-    // Save a socket (same as createSocket but with the correct method name for your tests)
+    // Save a socket
     public Socket saveSocket(Socket socket) {
         return socketRepository.save(socket);
     }
