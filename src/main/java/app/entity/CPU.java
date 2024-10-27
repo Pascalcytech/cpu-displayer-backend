@@ -29,6 +29,10 @@ public class CPU {
     @JsonIgnore // Prevents the socket field from being serialized
     private Socket socket;
 
+    // New field for socket_id
+    @Column(name = "socket_id", nullable = false, insertable = false, updatable = false) // This field is mapped but not directly used
+    private Long socket_id;
+
     // Constructors
     public CPU() {
     }
@@ -70,5 +74,10 @@ public class CPU {
 
     public void setSocket(Socket socket) {
         this.socket = socket;
+    }
+
+    // Getter for socket_id
+    public Long getSocket_id() {
+        return socket != null ? socket.getId() : null; // Return socket's id if socket is not null
     }
 }

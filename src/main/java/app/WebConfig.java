@@ -14,14 +14,3 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 }
-/*
-public class WebConfig implements WebMvcConfigurer {
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**") // Allow CORS for your API endpoints
-                .allowedOrigins("http://localhost:3000") // Allow your frontend origin
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow necessary HTTP methods
-                .allowCredentials(true);
-    }
-}
-*/
